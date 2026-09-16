@@ -1,8 +1,30 @@
 export const es = {
   meta: {
-    title: "Rafael Corredor · Full Stack Developer & DevOps Engineer",
+    title: "Rafael Alfonso Corredor Gambín · Desarrollador Full Stack & DevOps",
     description:
-      "Portafolio de Rafael Alfonso Corredor Gambín, Desarrollador Full Stack e Ingeniero DevOps: microservicios con Spring Boot y Angular, CI/CD en Azure DevOps, AWS e integración de IA (RAG, MCP, agentes).",
+      "Portafolio de Rafael Alfonso Corredor Gambín, Desarrollador Full Stack e Ingeniero DevOps en Colombia: microservicios con Spring Boot y Angular, CI/CD en Azure DevOps, AWS e integración de IA (RAG, MCP, agentes).",
+    keywords: [
+      "Rafael Corredor",
+      "Rafael Alfonso Corredor Gambín",
+      "desarrollador full stack",
+      "ingeniero DevOps",
+      "ingeniero de sistemas",
+      "Spring Boot",
+      "Angular",
+      "TypeScript",
+      "PostgreSQL",
+      "AWS",
+      "Azure DevOps",
+      "microservicios",
+      "arquitectura hexagonal",
+      "RAG",
+      "MCP",
+      "agentes de IA",
+      "Cereté",
+      "Córdoba",
+      "Colombia",
+      "portafolio desarrollador",
+    ],
   },
   nav: {
     home: "Inicio",

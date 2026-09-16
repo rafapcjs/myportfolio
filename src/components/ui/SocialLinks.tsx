@@ -16,7 +16,7 @@ export function SocialLinks({ newTabLabel, size = "md", className }: Props) {
           <a
             href={url}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             className={cn(
               "inline-flex items-center justify-center rounded-md border border-border bg-surface text-muted transition-colors duration-200 hover:border-accent hover:text-accent",
               size === "lg" ? "h-11 w-11" : "h-10 w-10",

@@ -2,9 +2,30 @@ import type { Dictionary } from "./es";
 
 export const en: Dictionary = {
   meta: {
-    title: "Rafael Corredor · Full Stack Developer & DevOps Engineer",
+    title: "Rafael Alfonso Corredor Gambín · Full Stack Developer & DevOps",
     description:
-      "Portfolio of Rafael Alfonso Corredor Gambín, Full Stack Developer & DevOps Engineer: Spring Boot and Angular microservices, CI/CD on Azure DevOps, AWS and AI integration (RAG, MCP, agents).",
+      "Portfolio of Rafael Alfonso Corredor Gambín, Full Stack Developer & DevOps Engineer based in Colombia: Spring Boot and Angular microservices, CI/CD on Azure DevOps, AWS and AI integration (RAG, MCP, agents).",
+    keywords: [
+      "Rafael Corredor",
+      "Rafael Alfonso Corredor Gambín",
+      "full stack developer",
+      "DevOps engineer",
+      "systems engineer",
+      "Spring Boot",
+      "Angular",
+      "TypeScript",
+      "PostgreSQL",
+      "AWS",
+      "Azure DevOps",
+      "microservices",
+      "hexagonal architecture",
+      "RAG",
+      "MCP",
+      "AI agents",
+      "Colombia",
+      "remote developer",
+      "developer portfolio",
+    ],
   },
   nav: {
     home: "Home",

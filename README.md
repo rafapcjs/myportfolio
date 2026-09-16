@@ -165,3 +165,16 @@ src/
 - Contraste AA en ambos temas.
 - Fuentes autoalojadas con `next/font`, sin peticiones externas en runtime.
 - Sin imágenes pesadas; los iconos son SVG en línea.
+
+## SEO
+
+Todo se genera en `src/lib/seo.ts` a partir de `src/data` y los diccionarios:
+
+- Título, descripción y palabras clave por idioma (`meta` en `src/i18n/dictionaries`).
+- `canonical`, `hreflang` (es, en, x-default), Open Graph tipo `profile`, Twitter Card y `theme-color`.
+- Datos estructurados JSON-LD: `WebSite` → `ProfilePage` → `Person` (con foto, contacto, empleo actual, formación y habilidades).
+- `sitemap.xml`, `robots.txt` y `manifest.webmanifest` generados en el build.
+
+Para registrar el sitio en **Google Search Console**: elige "Etiqueta HTML", copia solo el valor de `content` y ponlo en la variable `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (en `.env` o en las variables del repo). Luego envía `https://<tu-dominio>/sitemap.xml` desde Search Console.
+
+Para comprobar los datos estructurados: https://search.google.com/test/rich-results con la URL publicada.

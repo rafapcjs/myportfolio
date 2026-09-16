@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "@/app/globals.css";
 import { BackToTop } from "@/components/layout/BackToTop";
@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { fontClassNames } from "@/lib/fonts";
-import { buildMetadata, buildPersonJsonLd, serializeJsonLd } from "@/lib/seo";
+import { buildJsonLd, buildMetadata, serializeJsonLd } from "@/lib/seo";
 
 type Props = {
   children: ReactNode;
@@ -16,6 +16,16 @@ type Props = {
 };
 
 export const dynamicParams = false;
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "dark light",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0b0f14" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f8fa" },
+  ],
+};
 
 export function generateStaticParams(): Array<{ locale: Locale }> {
   return locales.map((locale) => ({ locale }));
@@ -55,7 +65,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         </ThemeProvider>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildPersonJsonLd(locale)) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildJsonLd(locale)) }}
         />
       </body>
     </html>
