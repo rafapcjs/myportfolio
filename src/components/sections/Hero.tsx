@@ -1,11 +1,12 @@
 import { ArrowDown, Download } from "lucide-react";
+import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { Typewriter } from "@/components/motion/Typewriter";
 import { ButtonAnchor } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/ui/SocialLinks";
-import { getTech, profile } from "@/data";
+import { profile } from "@/data";
 import { localeNames, locales, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/getDictionary";
 import { withBasePath } from "@/lib/site";
@@ -33,7 +34,7 @@ export function Hero({ locale, dict }: Props) {
         <div className="animate-drift-slow absolute top-1/3 -right-10 h-80 w-80 rounded-full bg-accent-2/10 blur-3xl" />
       </div>
 
-      <div className="relative container-page grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:items-center">
+      <div className="relative container-page grid gap-12 lg:grid-cols-[1.35fr_1fr] lg:items-center">
         <Stagger stagger={0.1}>
           <StaggerItem>
             <p className="font-mono text-sm">
@@ -102,79 +103,33 @@ export function Hero({ locale, dict }: Props) {
           </StaggerItem>
         </Stagger>
 
-        <Reveal delay={0.35} variant="right">
-          <TiltCard>
-            <HeroCard locale={locale} dict={dict} />
+        <Reveal delay={0.2} variant="pop" className="order-first lg:order-none">
+          <TiltCard className="mx-auto w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[380px]">
+            <figure className="group relative">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-3 rounded-[1.75rem] bg-gradient-to-br from-accent/40 via-accent/5 to-accent-2/30 blur-xl"
+              />
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl shadow-black/30">
+                <Image
+                  src={withBasePath(profile.photo.src)}
+                  alt={profile.photo.alt[locale]}
+                  width={profile.photo.width}
+                  height={profile.photo.height}
+                  sizes="(min-width: 1024px) 380px, (min-width: 640px) 280px, 220px"
+                  loading="eager"
+                  fetchPriority="high"
+                  className="aspect-[3/4] w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-[1.04]"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg/90 to-transparent px-4 pt-10 pb-3 font-mono text-xs text-fg">
+                  <span className="text-accent">$</span> {profile.shortName}
+                  <span className="animate-blink ml-1 text-accent">_</span>
+                </figcaption>
+              </div>
+            </figure>
           </TiltCard>
         </Reveal>
       </div>
     </section>
-  );
-}
-
-function HeroCard({ locale, dict }: Props) {
-  const t = dict.hero.card;
-  const rows: Array<{ key: string; value: string | string[] }> = [
-    { key: t.status, value: t.statusValue },
-    { key: t.location, value: profile.location[locale] },
-    { key: t.stack, value: profile.coreStack.map((id) => getTech(id).name) },
-    {
-      key: t.languages,
-      value: profile.languages.map((l) => `${l.name[locale]} (${l.level[locale]})`),
-    },
-    { key: t.focus, value: t.focusValue },
-  ];
-
-  return (
-    <div className="rounded-lg border border-border bg-surface shadow-2xl shadow-black/20 dark:shadow-black/50">
-      <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-        <span aria-hidden="true" className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border" />
-          <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-        </span>
-        <span className="ml-2 font-mono text-xs text-muted">{t.title}</span>
-      </div>
-      <Stagger
-        as="div"
-        stagger={0.09}
-        delay={0.6}
-        className="space-y-3 p-5 font-mono text-sm leading-6"
-      >
-        <span aria-hidden="true" className="text-muted">
-          {"{"}
-        </span>
-        <dl className="contents">
-          {rows.map((row) => (
-            <StaggerItem key={row.key} className="grid grid-cols-[auto_1fr] gap-x-3 pl-4">
-              <dt className="text-accent-2">
-                &quot;{row.key}&quot;<span className="text-muted">:</span>
-              </dt>
-              <dd className="text-fg">
-                {Array.isArray(row.value) ? (
-                  <span className="flex flex-wrap gap-x-1">
-                    <span className="text-muted">[</span>
-                    {row.value.map((item, index) => (
-                      <span key={item}>
-                        &quot;{item}&quot;
-                        {index < row.value.length - 1 ? (
-                          <span className="text-muted">,</span>
-                        ) : null}
-                      </span>
-                    ))}
-                    <span className="text-muted">]</span>
-                  </span>
-                ) : (
-                  <>&quot;{row.value}&quot;</>
-                )}
-              </dd>
-            </StaggerItem>
-          ))}
-        </dl>
-        <span aria-hidden="true" className="text-muted">
-          {"}"}
-        </span>
-      </Stagger>
-    </div>
   );
 }
