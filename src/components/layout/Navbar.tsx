@@ -1,9 +1,11 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { Button } from "@/components/ui/Button";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import type { Locale } from "@/i18n/config";
@@ -64,7 +66,7 @@ export function Navbar({ locale, nav, theme, languageLabel }: Props) {
         aria-current={isActive ? "true" : undefined}
         onClick={() => mobile && setOpen(false)}
         className={cn(
-          "group inline-flex items-center gap-2 rounded-md text-sm transition-colors duration-200",
+          "group relative inline-flex items-center gap-2 rounded-md text-sm transition-colors duration-200",
           mobile ? "w-full px-3 py-3 text-base" : "px-3 py-2",
           isActive ? "text-fg" : "text-muted hover:text-fg",
         )}
@@ -78,9 +80,19 @@ export function Navbar({ locale, nav, theme, languageLabel }: Props) {
         >
           {number}.
         </span>
-        <span className={cn(isActive && "underline decoration-accent underline-offset-8")}>
+        <span
+          className={cn(mobile && isActive && "underline decoration-accent underline-offset-8")}
+        >
           {label}
         </span>
+        {!mobile && isActive ? (
+          <motion.span
+            aria-hidden="true"
+            layoutId="nav-active-indicator"
+            transition={{ type: "spring", stiffness: 380, damping: 32 }}
+            className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent"
+          />
+        ) : null}
       </a>
     );
   };
@@ -136,6 +148,7 @@ export function Navbar({ locale, nav, theme, languageLabel }: Props) {
           </ul>
         </nav>
       </div>
+      <ScrollProgress />
     </header>
   );
 }

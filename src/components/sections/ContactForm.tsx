@@ -1,7 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Send } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { CircleCheck, Send } from "lucide-react";
 import { useId, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -150,8 +151,31 @@ export function ContactForm({ labels, email, formspreeId, locale }: Props) {
           {busy ? labels.sending : labels.send}
         </Button>
         <p role="status" aria-live="polite" className="text-sm">
-          {status === "success" ? <span className="text-accent">{labels.success}</span> : null}
-          {status === "error" ? <span className="text-red-500">{labels.error}</span> : null}
+          <AnimatePresence mode="wait">
+            {status === "success" ? (
+              <motion.span
+                key="success"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="inline-flex items-center gap-1.5 text-accent"
+              >
+                <CircleCheck aria-hidden="true" className="h-4 w-4" />
+                {labels.success}
+              </motion.span>
+            ) : null}
+            {status === "error" ? (
+              <motion.span
+                key="error"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="text-red-500"
+              >
+                {labels.error}
+              </motion.span>
+            ) : null}
+          </AnimatePresence>
         </p>
       </div>
     </form>

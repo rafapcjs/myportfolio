@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "@/app/globals.css";
+import { BackToTop } from "@/components/layout/BackToTop";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -50,6 +51,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
           </main>
           <Footer locale={locale} dict={dict} />
+          <BackToTop label={dict.footer.backToTop} />
         </ThemeProvider>
         <script
           type="application/ld+json"

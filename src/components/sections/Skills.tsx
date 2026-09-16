@@ -1,4 +1,5 @@
-import { Reveal } from "@/components/motion/Reveal";
+import { Lift } from "@/components/motion/Lift";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TechList } from "@/components/ui/TechChip";
@@ -19,27 +20,27 @@ export function Skills({ locale, dict }: Props) {
       <div className="container-page">
         <SectionHeading id="skills-title" index={4} title={t.title} subtitle={t.subtitle} />
 
-        <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {skillCategories.map((category, index) => {
+        <Stagger as="ul" stagger={0.07} className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {skillCategories.map((category) => {
             const Icon = category.icon;
             const name = category.name[locale];
             return (
-              <li key={category.id} className="flex">
-                <Reveal delay={(index % 4) * 0.06} className="flex w-full">
-                  <Card className="w-full">
+              <StaggerItem as="li" key={category.id} className="flex">
+                <Lift className="flex w-full">
+                  <Card interactive className="group w-full">
                     <h3 className="flex items-center gap-2 text-base font-semibold">
-                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-accent/10 text-accent">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-accent/10 text-accent transition-transform duration-300 motion-safe:group-hover:scale-110 motion-safe:group-hover:rotate-6">
                         <Icon aria-hidden="true" className="h-4 w-4" />
                       </span>
                       {name}
                     </h3>
                     <TechList ids={category.skills} size="md" label={name} className="mt-4" />
                   </Card>
-                </Reveal>
-              </li>
+                </Lift>
+              </StaggerItem>
             );
           })}
-        </ul>
+        </Stagger>
       </div>
     </section>
   );

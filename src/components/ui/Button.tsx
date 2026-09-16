@@ -6,11 +6,13 @@ export type ButtonVariant = "primary" | "secondary" | "ghost";
 export type ButtonSize = "md" | "sm" | "icon";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap transition-[color,background-color,border-color,transform,box-shadow] duration-200 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-accent text-accent-fg hover:brightness-110",
-  secondary: "border border-border bg-surface text-fg hover:border-accent hover:text-accent",
+  primary:
+    "bg-accent text-accent-fg hover:brightness-110 motion-safe:hover:shadow-lg motion-safe:hover:shadow-accent/25",
+  secondary:
+    "border border-border bg-surface text-fg hover:border-accent hover:text-accent motion-safe:hover:shadow-md motion-safe:hover:shadow-accent/10",
   ghost: "text-muted hover:bg-surface-2 hover:text-fg",
 };
 

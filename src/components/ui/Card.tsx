@@ -20,7 +20,8 @@ export function Card<T extends ElementType = "div">({
       className={cn(
         "rounded-lg border bg-surface p-6",
         dashed ? "border-dashed border-border" : "border-border",
-        interactive && "transition-colors duration-200 hover:border-accent/60",
+        interactive &&
+          "transition-[border-color,box-shadow] duration-300 hover:border-accent/60 motion-safe:hover:shadow-xl motion-safe:hover:shadow-accent/10",
         className,
       )}
       {...props}

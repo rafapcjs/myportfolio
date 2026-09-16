@@ -1,5 +1,6 @@
 import { ExternalLink, FolderGit2, ShieldCheck } from "lucide-react";
-import { Reveal } from "@/components/motion/Reveal";
+import { Lift } from "@/components/motion/Lift";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -28,15 +29,15 @@ export function Projects({ locale, dict }: Props) {
       <div className="container-page">
         <SectionHeading id="projects-title" index={3} title={t.title} subtitle={t.subtitle} />
 
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <li key={project.id} className="flex">
-              <Reveal delay={(index % 3) * 0.08} className="flex w-full">
+        <Stagger as="ul" stagger={0.08} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <StaggerItem as="li" key={project.id} className="flex">
+              <Lift className="flex w-full">
                 <ProjectCard project={project} locale={locale} dict={dict} />
-              </Reveal>
-            </li>
+              </Lift>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
       </div>
     </section>
   );

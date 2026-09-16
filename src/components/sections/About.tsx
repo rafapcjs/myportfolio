@@ -36,14 +36,14 @@ export function About({ locale, dict }: Props) {
 
         <div className="grid gap-10 lg:grid-cols-[300px_1fr]">
           <Reveal className="mx-auto w-full max-w-[300px] lg:mx-0">
-            <figure className="relative overflow-hidden rounded-lg border border-border bg-surface">
+            <figure className="group relative overflow-hidden rounded-lg border border-border bg-surface transition-[border-color,box-shadow] duration-300 hover:border-accent/60 motion-safe:hover:shadow-xl motion-safe:hover:shadow-accent/10">
               <Image
                 src={withBasePath(profile.photo.src)}
                 alt={profile.photo.alt[locale]}
                 width={profile.photo.width}
                 height={profile.photo.height}
                 sizes="(min-width: 1024px) 300px, 80vw"
-                className="aspect-[3/4] w-full object-cover"
+                className="aspect-[3/4] w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-[1.04]"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg/90 to-transparent px-4 pt-10 pb-3 font-mono text-xs text-fg">
                 <span className="text-accent">$</span> {profile.shortName}
